@@ -5,7 +5,7 @@ import axios from "axios";
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-class HospitalBeds extends Component {
+class Density extends Component {
     state = {
         data: undefined,
         done: false,
@@ -13,7 +13,7 @@ class HospitalBeds extends Component {
 
     componentWillMount() {
         axios
-            .get(`${process.env.REACT_APP_URL}/hospital-beds`)
+            .get(`${process.env.REACT_APP_URL}/population-census`)
             .then((response) => {
                 this.setState({ data: response.data });
             })
@@ -21,10 +21,7 @@ class HospitalBeds extends Component {
                 console.log(error);
                 this.setState({ data: null });
             })
-            .finally(() => {
-                console.log(this.state.data);
-                this.setState({ done: true });
-            });
+            .finally(() => this.setState({ done: true }));
     }
 
     getOptions = () => {
@@ -45,31 +42,29 @@ class HospitalBeds extends Component {
 
         let dataPoints = [];
         for (let item of this.state.data) {
-            if (!states.includes(item["State/UT"])) continue;
+            if (!states.includes(item["State / Union Territory"])) continue;
+            let value = item["Density"].split("(")[0];
+            value = value.substring(0, value.length - 5).replace(",", "");
             dataPoints.push({
-                label: item["State/UT"],
-                y: parseInt(item["TotalPublicHealthFacilities_HMIS"]),
+                label: item["State / Union Territory"],
+                y: parseInt(value),
             });
         }
 
         return {
             animationEnabled: true,
-            theme: "light2",
             title: {
-                text:
-                    "Total number of Health Facilities in some States/UTs of India",
+                text: "Average Density of people in some States/UTs of India",
             },
             axisX: {
                 title: "States",
-                reversed: true,
             },
             axisY: {
-                title: "Total number of Health Facilities",
-                labelFormatter: this.addSymbols,
+                title: "Average number of people per km^2",
             },
             data: [
                 {
-                    type: "bar",
+                    type: "line",
                     dataPoints,
                 },
             ],
@@ -96,4 +91,4 @@ class HospitalBeds extends Component {
     }
 }
 
-export default HospitalBeds;
+export default Density;
