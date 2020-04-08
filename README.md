@@ -2,6 +2,10 @@
 
 This website provides some visualizations related to COVID-19 pandemic.
 
+### REST API serving data used in the website
+
+[COVID-19-REST-API](https://www.github.com/saran-shabd/COVID-19-REST-API)
+
 ## Screenshots
 
 ### COVID-19 Age Group Percentage
