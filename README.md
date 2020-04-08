@@ -2,6 +2,20 @@
 
 This website provides some visualizations related to COVID-19 pandemic.
 
+## Screenshots
+
+### COVID-19 Age Group Percentage
+
+<img src="screenshots/AgeGroup.png" alt="Not able to render the image" />
+
+### Total number of Health Facilities in some States/UTs of India
+
+<img src="screenshots/HealthFacilities.png" alt="Not able to render the image" />
+
+### Average Density of people in some States/UTs of India
+
+<img src="screenshots/Density.png" alt="Not able to render the image" />
+
 ## Run locally using `yarn`
 
 -   Run application:
