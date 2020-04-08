@@ -25,7 +25,8 @@ class Density extends Component {
     }
 
     getOptions = () => {
-        if (!this.state.done) return {};
+        if (!this.state.done || [undefined, null].includes(this.state.data))
+            return {};
 
         const states = [
             "Delhi",

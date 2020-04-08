@@ -25,7 +25,8 @@ class Chart extends Component {
     }
 
     getOptions = () => {
-        if (undefined === this.state.data) return {};
+        if (!this.state.done || [undefined, null].includes(this.state.data))
+            return {};
 
         let dataPoints = [];
         for (const item of this.state.data) {
